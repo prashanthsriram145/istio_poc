@@ -1,0 +1,7 @@
+-- Command to check what routes are associated with istio-ingressgateway pod:
+istioctl proxy-config routes istio-ingressgateway-77bfdf67f4-dn4hb -n istio-system
+
+-- Run this command to run minikube tunnel so that istio ingress gateway is accessible on external IP in minikube
+minikube tunnel
+
+
