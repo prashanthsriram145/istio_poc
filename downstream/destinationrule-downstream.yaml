@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: downstream-dr
+  namespace: tracing-demo
+spec:
+  host: downstream.tracing-demo.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
+    loadBalancer:
+      simple: ROUND_ROBIN
+
+
+---
+
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: istio-system   # mesh-scoped if installed in istio-system, or use cluster-wide via istioctl
+spec:
+  mtls:
+    mode: STRICT
