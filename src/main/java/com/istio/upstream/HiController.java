@@ -14,11 +14,7 @@ public class HiController {
 
     @GetMapping("/hi")
     public ResponseEntity<String> hi() {
-        if(random.nextBoolean()) {
-            log.info("Custom internal error");
-            return ResponseEntity.internalServerError().body("Custom internal error");
-        }
         log.info("Success response from downstream");
-        return ResponseEntity.ok("Hello from Service B");
+        return ResponseEntity.ok("Hello from Service B - V2");
     }
 }

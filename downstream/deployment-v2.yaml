@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: downstream-v2
+  namespace: tracing-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: downstream
+  template:
+    metadata:
+      labels:
+        app: downstream
+        version: v2
+      annotations:
+        sidecar.istio.io/rewriteAppHTTPProbers: "false"
+    spec:
+      containers:
+        - name: downstream
+          image: prashanthsriram145/downstream:v2
+          env:
+            - name: OTEL_METRICS_EXPORTER
+              value: "none"
+          ports:
+            - containerPort: 8080
+#          startupProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8080
+#            periodSeconds: 5
+#            failureThreshold: 30
+
